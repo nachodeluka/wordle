@@ -1,0 +1,83 @@
+:root {
+    --background: hsl(220 7% 8%);
+
+    --correct: #43a047;
+    --present: #e4a81d;
+    --incorrect: #bb3429;
+    --absent: #757575;
+
+    --key-bg: #3f4752;
+    --key-absent: #222;
+
+    --border: rgb(66, 66, 66);
+    --border-selected: rgb(144, 202, 249);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.tablero {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.cell {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--border);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.teclado {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.teclado button {
+    color: inherit;
+    background-color: var(--key-bg);
+    border: 2px solid var(--border);
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 60px;
+    text-transform: uppercase;
+
+}
+
+.primero,
+.segundo,
+.tercero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
