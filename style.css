@@ -11,6 +11,8 @@
 
     --border: rgb(66, 66, 66);
     --border-selected: rgb(144, 202, 249);
+
+    --color: hsl(0 0% 98%);
 }
 
 * {
@@ -48,8 +50,12 @@ body {
     align-items: center;
     border: 2px solid var(--border);
     color: white;
-    font-size: 24px;
+    font-size: 1.9rem;
     font-weight: bold;
+    user-select: none;
+    cursor: default;
+    border-radius: 5px;
+    text-transform: uppercase;
 }
 
 .teclado {
@@ -62,16 +68,17 @@ body {
 
 .teclado button {
     color: inherit;
+    color: var(--color);
     background-color: var(--key-bg);
     border: 2px solid var(--border);
     padding: 10px;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
     height: 60px;
     text-transform: uppercase;
-
+    box-sizing: border-box;
 }
 
 .primero,
@@ -80,4 +87,26 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
+}
+
+.teclado button:hover {
+    filter: brightness(1.2);
+    background-color: var(--key-bg);
+}
+
+#correct {
+    background-color: var(--correct);
+}
+
+#present {
+    background-color: var(--present);
+}
+
+#incorrect {
+    background-color: var(--incorrect);
+}
+
+#absent {
+    background-color: var(--absent);
 }
