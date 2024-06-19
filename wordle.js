@@ -40,6 +40,23 @@ function inicio() {
 
     document.getElementById("borrar").addEventListener("click", borrar);
     document.getElementById("enviar").addEventListener("click", enviar);
+    document.addEventListener("keypress", event => {
+        let teclado = "abcdefghijklmnopqrstuvwxyz".split("");
+        let letra = event.key;
+
+        if (letra == "Enter") {
+            enviar();
+        }
+
+        if (!teclado.includes(letra.toLocaleLowerCase())) return;
+
+        if (seleccion.length >= 5) return;
+        seleccion.push(letra);
+        console.log(event.target)
+        agregarLetraTablero(letra, event);
+
+    })
+
 }
 
 function agregarLetraTablero(letra, boton) {
@@ -94,7 +111,7 @@ function enviar() {
     let verif = verificarPalabra();
 
     if (!verif) {
-        return alert("Debes completar la fila antes de enviar.")
+        return alert("No hay suficientes letras.")
     }
 
     let contadorCorrectas = 0;
