@@ -2,7 +2,7 @@ window.addEventListener('load', inicio);
 
 let palabra = "pelos";
 let intentos = 6;
-let letras = [];
+let filasTablero = [];
 let letrasCorrectas = [];
 let letrasIncorrectas = [];
 let filaActual = 0;
@@ -25,7 +25,7 @@ let seleccion = [];
 // }
 
 function inicio() {
-    let botones = document.querySelectorAll("#letra");
+    let botones = document.querySelectorAll(".letra");
 
     botones.forEach(boton => {
         boton.addEventListener("click", function () {
@@ -37,12 +37,16 @@ function inicio() {
 
         });
     });
+
+    document.getElementById("borrar").addEventListener("click", borrar);
+    document.getElementById("enviar").addEventListener("click", enviar);
 }
 
 function agregarLetraTablero(letra, boton) {
     let tablero = document.querySelector(".tablero");
     let row = tablero.children[filaActual];
     let cell = row.children[seleccion.length - 1];
+    cell.id = letra;
     cell.innerHTML = letra;
 }
 
@@ -74,5 +78,48 @@ function verificarPalabra() {
         }
     }
 
-    console.log(resultado)
+    return resultado;
+}
+
+function borrar() {
+    if (seleccion.length == 0) return;
+    let tablero = document.querySelector(".tablero");
+    let row = tablero.children[filaActual];
+    let cell = row.children[seleccion.length - 1];
+    cell.innerHTML = "";
+    seleccion.pop();
+}
+
+function enviar() {
+    let verif = verificarPalabra();
+
+    if (!verif) {
+        return alert("Debes completar la fila antes de enviar.")
+    }
+
+    let contadorCorrectas = 0;
+    for (let letra of verif) {
+        let elementos = document.querySelectorAll(`#${letra.letraSeleccionada}`);
+
+        let colores = { correcto: "#43a047", lugar: "#e4a81d", incorrecto: "#757575" }
+
+        verif.color = colores[letra.estado];
+
+        for (let tecla of elementos) {
+            tecla.style.backgroundColor = colores[letra.estado];
+        }
+
+        if (letra.estado == "correcto") {
+            contadorCorrectas++;
+        }
+    }
+
+    filasTablero.push(verif)
+    filaActual++;
+    intentos--;
+    seleccion = [];
+
+    if (contadorCorrectas == 5) {
+        return alert(`Ganaste!!!!! Intentos usados: ${6 - intentos}/6.`)
+    }
 }
